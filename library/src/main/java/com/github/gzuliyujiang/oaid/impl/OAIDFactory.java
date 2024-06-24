@@ -72,6 +72,10 @@ public final class OAIDFactory {
         if (OAIDRom.isASUS()) {
             return new AsusImpl(context);
         }
+//无论华为还是荣耀 都先走华为的处理方式
+        if (OAIDRom.isHonor()||OAIDRom.isHuawei() || OAIDRom.isEmui()) {
+            return new HuaweiImpl(context);
+        }
         if (OAIDRom.isHonor()) {
             HonorImpl honor = new HonorImpl(context);
             if (honor.supported()) {
@@ -79,9 +83,7 @@ public final class OAIDFactory {
                 return honor;
             }
         }
-        if (OAIDRom.isHuawei() || OAIDRom.isEmui()) {
-            return new HuaweiImpl(context);
-        }
+
         if (OAIDRom.isOppo() || OAIDRom.isOnePlus()) {
             OppoImpl oppo = new OppoImpl(context);
             if (oppo.supported()) {
