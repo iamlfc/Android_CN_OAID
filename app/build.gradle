@@ -31,8 +31,8 @@ android {
         manifestPlaceholders = [
                 MY_CHANNEL: "unknown",
         ]
-        versionCode 4281
-        versionName "4.2.8.1"
+        versionCode 4282
+        versionName "4.2.802"
     }
 
     // 打包维度列表，会按维度名字母顺序执行，最终发布的具体渠道包的生成可以借助360加固等工具
