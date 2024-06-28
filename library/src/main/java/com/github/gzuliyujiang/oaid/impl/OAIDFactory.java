@@ -36,7 +36,7 @@ public final class OAIDFactory {
             // See https://github.com/gzu-liyujiang/Android_CN_OAID/pull/23
             context = context.getApplicationContext();
         }
-        if (ioaid != null) {
+        if (ioaid != null&&(OAIDRom.getGetFailTag()!=2&&OAIDRom.getGetFailTag()!=3)) {
             return ioaid;
         }
         // 优先尝试各厂商自家提供的接口
@@ -73,16 +73,23 @@ public final class OAIDFactory {
             return new AsusImpl(context);
         }
 //无论华为还是荣耀 都先走华为的处理方式
-        if (OAIDRom.isHonor()||OAIDRom.isHuawei() || OAIDRom.isEmui()) {
-            return new HuaweiImpl(context);
-        }
-        if (OAIDRom.isHonor()) {
-            HonorImpl honor = new HonorImpl(context);
-            if (honor.supported()) {
-                // 支持的话（Magic UI 4.0,5.0,6.0及MagicOS 7.0或以上）直接使用荣耀的实现，否则尝试华为的实现
-                return honor;
+        if (OAIDRom.isHonor()||OAIDRom.isHuawei() || OAIDRom.isEmui() ){
+            if (OAIDRom.getGetFailTag()==2||OAIDRom.getGetFailTag()==3){
+                if (OAIDRom.isHonor()) {
+                    HonorImpl honor = new HonorImpl(context);
+                    if (honor.supported()) {
+                        // 支持的话（Magic UI 4.0,5.0,6.0及MagicOS 7.0或以上）直接使用荣耀的实现，否则尝试华为的实现
+                        return honor;
+                    }
+                }
+            }else {
+                if (OAIDRom.isHonor()||OAIDRom.isHuawei() || OAIDRom.isEmui()) {
+                    return new HuaweiImpl(context);
+                }
             }
         }
+
+
 
         if (OAIDRom.isOppo() || OAIDRom.isOnePlus()) {
             OppoImpl oppo = new OppoImpl(context);

@@ -28,6 +28,17 @@ import java.lang.reflect.Method;
 @SuppressWarnings("All")
 public final class OAIDRom {
 
+    //    获取oaid 成功的标识   0 未获取  1 获取成功  2 获取失败  3 使用IMEI
+    private static int GetFailTag = 0;
+
+    public static int getGetFailTag() {
+        return GetFailTag;
+    }
+
+    public static void setGetFailTag(int getFailTag) {
+        GetFailTag = getFailTag;
+    }
+
     private OAIDRom() {
         super();
     }
